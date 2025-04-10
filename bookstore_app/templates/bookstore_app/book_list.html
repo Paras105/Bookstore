@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Explore Our Book Collection</h2>
+    <div class="row">
+        {% for book in books %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow">
+                <img src="{{ book.cover_image }}" class="card-img-top" alt="{{ book.title }}" style="height: 350px; object-fit: cover;">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text text-muted">by {{ book.author }}</p>
+                    <p class="card-text"><strong>₹{{ book.price }}</strong></p>
+                    <a href="{% url 'add_to_cart' book.id %}" class="btn btn-primary mt-auto">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-4">
+        <a href="{% url 'view_cart' %}" class="btn btn-outline-success">Go to Cart</a>
+    </div>
+</div>
+{% endblock %}
