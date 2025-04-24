@@ -1,11 +1,14 @@
 from django.urls import path
-from . import views
+from .views import (
+    BookListView, LoginView, LogoutView,
+    AddToCartView, CartView, AdminBookListView
+)
 
 urlpatterns = [
-    path('', views.book_list, name='book_list'),
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
-    path('add-to-cart/<int:book_id>/', views.add_to_cart, name='add_to_cart'),
-    path('cart/', views.view_cart, name='view_cart'),  # ✅ Fix this line
+    path('', BookListView.as_view(), name='book_list'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('add-to-cart/<int:book_id>/', AddToCartView.as_view(), name='add_to_cart'),
+    path('cart/', CartView.as_view(), name='view_cart'),
+    path('admin/books/', AdminBookListView.as_view(), name='admin_book_list'),
 ]
-
